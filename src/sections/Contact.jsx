@@ -34,7 +34,11 @@ function run(raw) {
       return experience.flatMap(x => [out(`${x.role} @ ${x.company} — ${x.location}`, 'g'), ...x.points.map(p => out(`  › ${p}`, 'dim'))])
     case 'projects':
     case 'ls':
-      return projects.map(p => out(`${p.id}  ${p.name.padEnd(28)} [${p.severity}]  ${p.tagline}`, p.severity === 'CRITICAL' ? 'r' : ''))
+      return projects.flatMap(p => [
+        out(`${p.id}  ${p.name.padEnd(24)} [${p.severity}] ${p.status ? `(${p.status})` : ''}`, p.severity === 'CRITICAL' ? 'r' : 'g'),
+        out(`   › ${p.tagline}`, 'dim'),
+        out(`   › repo: ${p.github}`, 'dim'),
+      ])
     case 'skills':
       return skills.map(s => out(`[${s.code}] ${s.items.join(', ')}`))
     case 'certs':

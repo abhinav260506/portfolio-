@@ -42,7 +42,10 @@ export const projects = [
     name: 'RAGShield',
     tagline: 'Automated RAG Security Assessment Framework',
     period: 'May 2026 — Aug 2026',
+    status: 'ACTIVE POC',
     severity: 'CRITICAL',
+    github: 'https://github.com/abhinav260506/RAGShield',
+    demo: 'https://github.com/abhinav260506/RAGShield#security-assessment-traces',
     stack: ['FastAPI', 'ChromaDB', 'Ollama', 'Python'],
     summary:
       'An end-to-end security scanner that attacks every layer of a Retrieval-Augmented Generation pipeline and reports findings like a pentest.',
@@ -59,8 +62,11 @@ export const projects = [
     id: 'CASE-002',
     name: 'Surgical-Guard',
     tagline: 'Semantic Middleware for AI Agent Security',
-    period: 'Jan 2026 — Mar 2026',
+    period: 'Jan 2026 — Apr 2026',
+    status: 'MITIGATED',
     severity: 'HIGH',
+    github: 'https://github.com/abhinav260506/Surgical-Guard',
+    demo: 'https://github.com/abhinav260506/Surgical-Guard#architecture',
     stack: ['Transformers.js', 'Chrome API', 'WebAssembly'],
     summary:
       'A browser-based AI firewall that stops indirect prompt injection and data exfiltration before hostile content reaches an autonomous agent.',
@@ -78,7 +84,10 @@ export const projects = [
     name: 'Agentic Threat Orchestrator',
     tagline: 'Multimodal Cyber-Physical Threat Detection',
     period: 'Oct 2025 — Dec 2025',
+    status: 'SOC VERIFIED',
     severity: 'HIGH',
+    github: 'https://github.com/abhinav260506/Agentic-Threat-Orchestrator',
+    demo: 'https://github.com/abhinav260506/Agentic-Threat-Orchestrator#soc-auditability',
     stack: ['Gemini', 'Random Forest', 'OpenCV', 'ChromaDB', 'Flask'],
     summary:
       'A decentralised multi-agent system correlating network telemetry with surveillance feeds to catch attacks that span the digital and physical worlds.',
@@ -149,3 +158,33 @@ export const education = [
 ]
 
 export const languages = ['Telugu (Native)', 'English (Fluent)', 'Hindi (Intermediate)', 'German (Basic)']
+
+export const platforms = [
+  {
+    name: 'TryHackMe',
+    tag: 'OFFSEC LABS',
+    role: 'Offensive Security & Red Teaming',
+    handle: 'abhinav26',
+    url: 'https://tryhackme.com/p/abhinav260506',
+    badge: 'Active Rank',
+    stats: 'Rooms: VA/PT, Web Fundamentals, Network Security',
+  },
+  {
+    name: 'Hack The Box',
+    tag: 'PEN-TESTING',
+    role: 'Privilege Escalation & Machine Exploitation',
+    handle: 'abhinav',
+    url: 'https://app.hackthebox.com',
+    badge: 'Security Labs',
+    stats: 'Focus: Linux/Windows Exploits & CTFs',
+  },
+  {
+    name: 'PortSwigger Web Security',
+    tag: 'APPSEC ACADEMY',
+    role: 'OWASP Top 10 Exploitation & Defense',
+    handle: 'Practitioner',
+    url: 'https://portswigger.net/web-security',
+    badge: 'Burp Suite Lab',
+    stats: 'SQLi, XSS, SSRF, Auth Bypass & Token Manipulation',
+  },
+]

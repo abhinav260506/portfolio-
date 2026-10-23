@@ -111,6 +111,15 @@
   color: var(--amber);
   background: rgba(255, 176, 0, 0.06);
 }
+.case-status-badge {
+  font-family: var(--f-hud);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+  border: 1px dashed var(--line-2);
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
 .case-title-row {
   display: flex;
   justify-content: space-between;
@@ -281,6 +290,48 @@
   color: var(--green);
   font-size: 10px;
   letter-spacing: 0.14em;
+}
+.case-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 4px;
+}
+.case-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-hud);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: #000;
+  background: var(--green);
+  border: 1px solid var(--green);
+  padding: 8px 14px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.25);
+}
+.case-btn:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+.case-btn.ghost {
+  background: rgba(0, 255, 65, 0.04);
+  color: var(--green);
+  border: 1px solid rgba(0, 255, 65, 0.35);
+  box-shadow: none;
+}
+.case-btn.ghost:hover {
+  background: rgba(0, 255, 65, 0.15);
+  color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
 }
 .case-stack {
   margin-top: auto;
