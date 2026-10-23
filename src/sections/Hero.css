@@ -1,0 +1,238 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.55;
+}
+.hero-fade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.55) 45%, rgba(0, 0, 0, 0.2) 75%),
+    linear-gradient(to bottom, transparent 70%, #000 100%);
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  max-width: 1500px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--f-hud);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--green);
+  padding: 8px 14px;
+  border: 1px solid var(--line-2);
+  background: rgba(0, 0, 0, 0.6);
+  margin-bottom: 28px;
+}
+.hero-name {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 17vw, 9.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.hero-name .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+.hero-name .line-inner {
+  display: inline-block;
+}
+.hero-name .accent {
+  color: var(--green);
+}
+.hn-enc {
+  color: var(--red);
+}
+.hn-dot {
+  color: var(--red);
+}
+.hero-sub {
+  margin-top: 28px;
+}
+.hero-role {
+  font-family: var(--f-hud);
+  font-size: clamp(18px, 2.2vw, 26px);
+  margin: 0 0 18px;
+  color: var(--fg);
+  min-height: 1.5em;
+}
+.hero-role .gt {
+  color: var(--green);
+}
+.role-enc {
+  color: var(--green);
+  opacity: 0.6;
+}
+.hero-summary {
+  color: var(--fg-dim);
+  max-width: 54ch;
+  font-size: 15px;
+  margin: 0 0 32px;
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* console */
+.hero-console {
+  background: rgba(3, 8, 5, 0.86);
+  border: 1px solid var(--line-2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.04), 0 30px 80px -20px rgba(0, 255, 65, 0.15);
+}
+.hc-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-2);
+  font-family: var(--f-hud);
+  font-size: 12px;
+  color: var(--fg-mute);
+  letter-spacing: 0.06em;
+}
+.hc-bar .dots {
+  display: flex;
+  gap: 6px;
+}
+.hc-bar .dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+.hc-bar .dots i:first-child {
+  background: var(--red);
+}
+.hc-sim {
+  margin-left: auto;
+  color: var(--amber);
+  border: 1px solid rgba(255, 176, 0, 0.4);
+  padding: 1px 6px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+.hc-body {
+  padding: 16px 18px 20px;
+  font-size: 13px;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hc-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.75;
+  color: var(--fg-dim);
+}
+.hc-line.cmd {
+  color: var(--fg);
+}
+.hc-line .ps {
+  color: var(--green);
+}
+.hc-line.warn {
+  color: var(--red);
+}
+.hc-line.ok {
+  color: var(--green);
+}
+.caret {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: var(--green);
+  vertical-align: -2px;
+  margin-left: 2px;
+}
+
+/* corner HUD */
+.hero-hud .hud {
+  position: absolute;
+  z-index: 2;
+  font-family: var(--f-hud);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--fg-mute);
+}
+.hero-hud .hud b {
+  color: var(--green);
+  font-weight: 400;
+}
+.hud.tl {
+  top: 92px;
+  left: var(--gutter);
+}
+.hud.tr {
+  top: 92px;
+  right: var(--gutter);
+}
+.hud.bl {
+  bottom: 28px;
+  left: var(--gutter);
+  color: var(--green);
+}
+.hud.br {
+  bottom: 28px;
+  right: var(--gutter);
+}
+
+@media (max-width: 1024px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+  .hero-console {
+    max-width: 640px;
+  }
+  .hud.tl,
+  .hud.tr {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .hero {
+    padding-top: 110px;
+  }
+  .hero-badge {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+  .hc-body {
+    height: 240px;
+    font-size: 12px;
+  }
+  .hud.br {
+    display: none;
+  }
+  .hero-ctas .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

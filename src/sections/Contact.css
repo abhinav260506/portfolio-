@@ -1,0 +1,228 @@
+.contact {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+}
+.contact-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.contact-title {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+.contact-title .line {
+  display: block;
+  overflow: hidden;
+}
+.contact-title .line-inner {
+  display: inline-block;
+}
+.contact-title .accent {
+  color: var(--green);
+}
+.contact-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.term {
+  background: rgba(2, 6, 4, 0.92);
+  border: 1px solid var(--line-2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 30px 80px -20px rgba(0, 255, 65, 0.18);
+  cursor: text;
+}
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-2);
+  font-family: var(--f-hud);
+  font-size: 12px;
+  color: var(--fg-mute);
+}
+.term-bar .dots {
+  display: flex;
+  gap: 6px;
+}
+.term-bar .dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+.term-bar .dots i:first-child {
+  background: var(--red);
+}
+.term-live {
+  margin-left: auto;
+  color: var(--green);
+  border: 1px solid rgba(0, 255, 65, 0.4);
+  padding: 1px 6px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+.term-body {
+  height: 340px;
+  overflow-y: auto;
+  padding: 16px 18px;
+  font-size: 13px;
+  overscroll-behavior: contain;
+}
+.tl {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.7;
+  color: var(--fg);
+}
+.tl.dim {
+  color: var(--fg-dim);
+}
+.tl.g {
+  color: var(--green);
+}
+.tl.r {
+  color: var(--red);
+}
+.tl .ps {
+  color: var(--green);
+  margin-right: 8px;
+}
+.term-form {
+  display: flex;
+  align-items: center;
+}
+.term-form input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--fg);
+  font: inherit;
+  caret-color: var(--green);
+  padding: 0;
+}
+.term-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line-2);
+}
+.term-chips .tag {
+  cursor: pointer;
+}
+
+.c-links-wrap {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(56px, 8vw, 96px);
+}
+.c-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line-2);
+  background: rgba(0, 0, 0, 0.8);
+}
+.c-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  padding: 22px;
+  border-right: 1px solid var(--line-2);
+  transition: background 0.3s;
+}
+.c-link:last-child {
+  border-right: 0;
+}
+.c-link:hover {
+  background: var(--green-dim);
+}
+.c-link svg {
+  width: 20px;
+  height: 20px;
+  color: var(--green);
+  grid-row: span 2;
+}
+.c-k {
+  font-family: var(--f-hud);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--fg-mute);
+}
+.c-v {
+  font-size: 13px;
+  grid-column: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.c-arrow {
+  grid-row: 1 / span 2;
+  grid-column: 3;
+  align-self: center;
+  color: var(--green);
+  transition: transform 0.3s;
+}
+.c-link:hover .c-arrow {
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 1024px) {
+  .contact-inner {
+    grid-template-columns: 1fr;
+  }
+  .c-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .c-link:nth-child(2) {
+    border-right: 0;
+  }
+  .c-link:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line-2);
+  }
+}
+@media (max-width: 560px) {
+  .c-links {
+    grid-template-columns: 1fr;
+  }
+  .c-link {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .c-link:last-child {
+    border-bottom: 0;
+  }
+  .term-body {
+    height: 300px;
+    font-size: 12px;
+  }
+  .contact-ctas .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

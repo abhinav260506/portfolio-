@@ -1,0 +1,23 @@
+.footer {
+  border-top: 1px solid var(--line-2);
+  padding: 22px 0;
+  font-family: var(--f-hud);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--fg-mute);
+  position: relative;
+  z-index: 1;
+  background: #000;
+}
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer-mid {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--green);
+}

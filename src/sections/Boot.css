@@ -1,0 +1,92 @@
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  font-family: var(--f-mono);
+  clip-path: inset(0 0 0 0);
+}
+.boot-inner {
+  width: min(640px, 100%);
+}
+.boot-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--f-hud);
+  letter-spacing: 0.18em;
+  color: var(--green);
+  font-size: 13px;
+  margin-bottom: 28px;
+}
+.boot-shield svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 4;
+  filter: drop-shadow(0 0 6px var(--green));
+}
+.boot-lines {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  font-size: 13px;
+  color: var(--fg-dim);
+  min-height: 180px;
+}
+.boot-line {
+  opacity: 0;
+  visibility: hidden;
+  padding: 2px 0;
+}
+.boot-line .ok {
+  color: var(--green);
+}
+.boot-line .warn {
+  color: var(--amber);
+}
+.boot-bar {
+  height: 3px;
+  background: var(--line-2);
+  overflow: hidden;
+}
+.boot-bar-fill {
+  height: 100%;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.boot-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-family: var(--f-hud);
+  font-size: 12px;
+  color: var(--fg-mute);
+  letter-spacing: 0.12em;
+}
+.boot-meta > span:first-child {
+  color: var(--green);
+}
+.boot-granted {
+  margin-top: 36px;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(28px, 6vw, 44px);
+  letter-spacing: 0.2em;
+  color: var(--green);
+  text-shadow: 0 0 18px rgba(0, 255, 65, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.9);
+}
+@media (max-width: 520px) {
+  .boot-skip {
+    display: none;
+  }
+}

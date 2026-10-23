@@ -1,0 +1,105 @@
+.sk-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+.sk-card {
+  grid-column: span 6;
+}
+.sk-0 {
+  grid-column: span 7;
+}
+.sk-1 {
+  grid-column: span 5;
+}
+.sk-2 {
+  grid-column: span 5;
+}
+.sk-3 {
+  grid-column: span 7;
+}
+.sk-inner {
+  padding: clamp(22px, 3vw, 34px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+.sk-top {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-hud);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.sk-code {
+  color: var(--green);
+}
+.sk-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.sk-enc {
+  color: var(--green);
+}
+.sk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.owasp {
+  margin-top: clamp(64px, 9vw, 110px);
+  border-top: 1px solid var(--line-2);
+  border-bottom: 1px solid var(--line-2);
+  background: rgba(255, 51, 51, 0.025);
+}
+.owasp-label {
+  font-family: var(--f-hud);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--red);
+  padding: 10px var(--gutter);
+  border-bottom: 1px dashed var(--line-2);
+}
+.owasp-track {
+  overflow: hidden;
+  padding: 20px 0;
+}
+.owasp-row {
+  display: flex;
+  width: max-content;
+}
+.owasp-item {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2.4vw, 2rem);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--fg);
+  padding-right: 32px;
+}
+.owasp-item b {
+  color: var(--red);
+  font-family: var(--f-hud);
+  font-weight: 400;
+  font-size: 0.6em;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.owasp-item i {
+  font-style: normal;
+  color: var(--green);
+  margin-left: 32px;
+}
+@media (max-width: 900px) {
+  .sk-grid > .sk-card {
+    grid-column: 1 / -1;
+  }
+}
