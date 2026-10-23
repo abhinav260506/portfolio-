@@ -1,9 +1,10 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import SpotlightCard from '../components/reactbits/SpotlightCard/SpotlightCard'
 import GlitchText from '../components/reactbits/GlitchText/GlitchText'
-import { projects } from '../data'
+import { projects, projectCategories, researchStatement } from '../data'
 import './Projects.css'
 
 function AttackChain({ chain }) {
@@ -26,7 +27,127 @@ function AttackChain({ chain }) {
   )
 }
 
-function CaseFile({ p, index }) {
+function CaseBriefModal({ project, onClose }) {
+  if (!project || !project.brief) return null
+
+  const { brief } = project
+
+  return (
+    <div className="case-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div className="case-modal-backdrop" onClick={onClose} />
+      <div className="case-modal-panel hud">
+        <header className="cmp-header">
+          <div className="cmp-eyebrow">
+            <span className="pulse-dot" />
+            <span>DECLASSIFIED CASE BRIEF // {project.id}</span>
+            <span className={`sev sev-${project.severity.toLowerCase()}`}>{project.severity}</span>
+            <span className="case-status-badge">{project.status}</span>
+          </div>
+          <button type="button" className="cmp-close cursor-target" onClick={onClose} aria-label="Close brief" data-cursor-label="close">
+            <span>[ ✕ ESC ]</span>
+          </button>
+        </header>
+
+        <div className="cmp-scroll">
+          <div className="cmp-hero">
+            <h2 id="modal-title" className="cmp-title">{project.name}</h2>
+            <p className="cmp-tagline">{project.tagline}</p>
+            <div className="cmp-meta-bar">
+              <span><b>TIMELINE:</b> {project.period}</span>
+              <span><b>STACK:</b> {project.stack.join(', ')}</span>
+              <span><b>PRIMARY METRIC:</b> <span className="accent">{project.metric.value} {project.metric.label}</span></span>
+            </div>
+          </div>
+
+          {/* Section 01: The Attack & The Loophole */}
+          <section className="cmp-section">
+            <div className="cmp-sec-head">
+              <span className="cmp-sec-idx">01</span>
+              <h3>THE ATTACK SCENARIO &amp; THE LOOPHOLE</h3>
+            </div>
+            <div className="cmp-box alert-box">
+              <div className="cmp-box-title">{brief.problem.title}</div>
+              <p className="cmp-box-text">{brief.problem.scenario}</p>
+              {brief.problem.challenges && (
+                <div className="cmp-challenges">
+                  <div className="cmp-sub-head">CRITICAL VULNERABILITY CHALLENGES:</div>
+                  <ul>
+                    {brief.problem.challenges.map((ch, idx) => (
+                      <li key={idx}>
+                        <span className="ct-x">✕</span>
+                        <span>{ch}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Section 02: Architecture & How It Works */}
+          <section className="cmp-section">
+            <div className="cmp-sec-head">
+              <span className="cmp-sec-idx">02</span>
+              <h3>SYSTEM ARCHITECTURE &amp; DEFENSIVE PIPELINE</h3>
+            </div>
+            <div className="cmp-box">
+              <div className="cmp-box-title">{brief.solution.title}</div>
+              <div className="cmp-steps">
+                {brief.solution.architecture.map(st => (
+                  <div className="cmp-step" key={st.step}>
+                    <div className="cmp-step-badge">{st.step}</div>
+                    <div className="cmp-step-body">{st.text}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section 03: Demonstrated Impact */}
+          <section className="cmp-section">
+            <div className="cmp-sec-head">
+              <span className="cmp-sec-idx">03</span>
+              <h3>DEMONSTRATED BENCHMARKS &amp; DEFENSIVE VALUE</h3>
+            </div>
+            <div className="cmp-box metrics-box">
+              <div className="cmp-box-title">{brief.impact.title}</div>
+              <ul className="cmp-metrics-list">
+                {brief.impact.metrics.map((m, idx) => (
+                  <li key={idx}>
+                    <span className="cp-i">›</span>
+                    <span>{m}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          {/* Modal Actions */}
+          <footer className="cmp-footer">
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noreferrer" className="case-btn cursor-target" data-cursor-label="repo">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>SOURCE REPOSITORY ↗</span>
+              </a>
+            )}
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noreferrer" className="case-btn ghost cursor-target" data-cursor-label="poc">
+                <span>VIEW REPO DOCS / POC ↗</span>
+              </a>
+            )}
+            <button type="button" className="case-btn ghost cursor-target" onClick={onClose} data-cursor-label="close">
+              <span>CLOSE BRIEF [ESC]</span>
+            </button>
+          </footer>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function CaseFile({ p, index, onOpenBrief }) {
   return (
     <article className="case">
       <SpotlightCard className="hud case-card" spotlightColor="rgba(0, 255, 65, 0.16)" intensity={0.22} spotlightSize={520}>
@@ -77,6 +198,23 @@ function CaseFile({ p, index }) {
           </div>
 
           <div className="case-actions">
+            {p.brief && (
+              <button
+                type="button"
+                className="case-btn brief-btn cursor-target"
+                onClick={() => onOpenBrief(p)}
+                data-cursor-label="brief"
+              >
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+                <span>DECLASSIFY BRIEF ↓</span>
+              </button>
+            )}
             {p.github && (
               <a
                 href={p.github}
@@ -123,6 +261,40 @@ function CaseFile({ p, index }) {
 export default function Projects() {
   const root = useRef(null)
   const track = useRef(null)
+  const [selectedCategory, setSelectedCategory] = useState('ALL')
+  const [activeBrief, setActiveBrief] = useState(null)
+
+  const filteredProjects = selectedCategory === 'ALL'
+    ? projects
+    : projects.filter(p => p.category === selectedCategory)
+
+  // Close modal on Escape
+  useEffect(() => {
+    const handleKey = e => {
+      if (e.key === 'Escape') setActiveBrief(null)
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [])
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (activeBrief) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [activeBrief])
+
+  const handleCategoryChange = catId => {
+    setSelectedCategory(catId)
+    setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 120)
+  }
 
   useGSAP(
     () => {
@@ -130,7 +302,8 @@ export default function Projects() {
 
       // Desktop: pin the section and scroll the case files horizontally.
       mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
-        const distance = () => track.current.scrollWidth - window.innerWidth
+        if (!track.current) return
+        const distance = () => Math.max(0, track.current.scrollWidth - window.innerWidth)
         const tween = gsap.to(track.current, {
           x: () => -distance(),
           ease: 'none',
@@ -167,7 +340,7 @@ export default function Projects() {
         })
       })
     },
-    { scope: root }
+    { scope: root, dependencies: [selectedCategory] }
   )
 
   return (
@@ -182,29 +355,70 @@ export default function Projects() {
               </GlitchText>
             </div>
             <h2 className="h2">
-              Research that <span className="accent">attacks</span> AI
+              Research that <span className="accent">attacks</span> AI &amp; systems
               <br />
-              <span className="outline">so it can be trusted.</span>
+              <span className="outline">so they can be hardened.</span>
             </h2>
             <p className="lead">
-              Three systems built around the newest attack surface in security: LLMs, retrieval pipelines and autonomous agents. Each one is
-              offensive by design — I simulate the attack, then build the defense.
+              Offensive by design — I simulate adversarial vectors across LLMs, multi-agent systems, and cyber-physical infrastructure, then engineer evidence-backed defenses.
             </p>
+
+            {/* Research & Academic Statement Block */}
+            <div className="research-box hud">
+              <div className="rb-head">
+                <span className="pulse-dot" />
+                <span>RESEARCH FOCUS &amp; METHODOLOGY</span>
+              </div>
+              <p className="rb-desc">{researchStatement.statement}</p>
+              <div className="rb-pills">
+                {researchStatement.focusAreas.map(f => (
+                  <span className="rb-pill" key={f}>
+                    › {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Category Filter Tabs */}
+            <div className="proj-filter-wrap">
+              <div className="pf-label">FILTER CLASSIFICATION:</div>
+              <div className="proj-filters">
+                {projectCategories.map(c => {
+                  const count = c.id === 'ALL' ? projects.length : projects.filter(p => p.category === c.id).length
+                  return (
+                    <button
+                      key={c.id}
+                      type="button"
+                      className={`pf-btn cursor-target ${selectedCategory === c.id ? 'active' : ''}`}
+                      onClick={() => handleCategoryChange(c.id)}
+                      data-cursor-label="filter"
+                    >
+                      <span>{c.label}</span>
+                      <span className="pf-count">{count}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
             <div className="proj-hint">
-              <span>SCROLL</span>
+              <span>SCROLL CASE FILES</span>
               <span className="proj-hint-line" />
               <span>→</span>
             </div>
           </div>
 
-          {projects.map((p, i) => (
-            <CaseFile p={p} index={i} key={p.id} />
+          {filteredProjects.map((p, i) => (
+            <CaseFile p={p} index={i} key={p.id} onOpenBrief={setActiveBrief} />
           ))}
         </div>
         <div className="proj-progress" aria-hidden="true">
           <div className="proj-progress-fill" />
         </div>
       </div>
+
+      {/* Declassified Case Brief Modal */}
+      {activeBrief && <CaseBriefModal project={activeBrief} onClose={() => setActiveBrief(null)} />}
     </section>
   )
 }
