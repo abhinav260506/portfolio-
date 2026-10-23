@@ -9,7 +9,7 @@ const LINES = [
   ['[  OK  ]', 'Mounting /dev/offensive-security'],
   ['[  OK  ]', 'Loading payloads: recon, vapt, llm-redteam'],
   ['[ WARN ]', 'Untrusted prompt detected → quarantined by Surgical-Guard'],
-  ['[  OK  ]', 'RAGShield: 4/4 pipeline layers scanned'],
+  ['[  OK  ]', 'ThreatGraph: Neo4j STIX 2.1 knowledge graph active'],
   ['[  OK  ]', 'Establishing encrypted channel (TLS 1.3 · X25519)'],
   ['[  OK  ]', 'Identity verified: abhinav@sec-ops'],
 ]
