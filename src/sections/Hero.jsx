@@ -22,6 +22,81 @@ const SESSION = [
   { t: 'ok', v: 'abhinav — security engineer, ready to deploy' },
 ]
 
+function OperativeCard() {
+  return (
+    <div className="hero-operative-card corner-box" aria-label="Operative biometric identity dossier">
+      <div className="hoc-bar">
+        <div className="hoc-id">
+          <span className="pulse-dot" />
+          <span>OPERATIVE DOSSIER // AG-2605</span>
+        </div>
+        <span className="hoc-clearance">CLEARANCE: LEVEL-5 (TOP SECRET)</span>
+      </div>
+
+      <div className="hoc-body">
+        <div className="hoc-photo-frame">
+          <img
+            src="/profile.jpg"
+            alt="Abhinav Gunda - Security Engineer"
+            className="hoc-photo"
+            width="250"
+            height="315"
+            loading="eager"
+          />
+          <div className="hoc-scanline" aria-hidden="true" />
+          <div className="hoc-crosshairs" aria-hidden="true">
+            <span className="ch ch-tl">+</span>
+            <span className="ch ch-tr">+</span>
+            <span className="ch ch-bl">+</span>
+            <span className="ch ch-br">+</span>
+          </div>
+          <div className="hoc-bio-tag">
+            <span className="bio-dot" />
+            <span>BIO-AUTHENTICATED // OPERATIVE</span>
+          </div>
+        </div>
+
+        <div className="hoc-meta">
+          <div className="hoc-name-wrap">
+            <span className="hoc-meta-lbl">PERSONNEL FILE</span>
+            <div className="hoc-name">{profile.short}</div>
+            <div className="hoc-subname">{profile.name}</div>
+          </div>
+
+          <div className="hoc-specs">
+            <div className="hoc-spec-row">
+              <span className="hoc-k">SPEC</span>
+              <span className="hoc-v accent">OffSec · AI Red Team · VA/PT</span>
+            </div>
+            <div className="hoc-spec-row">
+              <span className="hoc-k">ACAD</span>
+              <span className="hoc-v">B.Tech CSE @ VIT Chennai</span>
+            </div>
+            <div className="hoc-spec-row">
+              <span className="hoc-k">STATUS</span>
+              <span className="hoc-v status-live">
+                <span className="live-dot" /> READY TO DEPLOY
+              </span>
+            </div>
+            <div className="hoc-spec-row">
+              <span className="hoc-k">BASE</span>
+              <span className="hoc-v">{profile.location.split(',')[1]?.trim()}, India</span>
+            </div>
+            <div className="hoc-spec-row">
+              <span className="hoc-k">HASH</span>
+              <span className="hoc-v mono">SHA-256: 7F4A...8B91</span>
+            </div>
+            <div className="hoc-spec-row">
+              <span className="hoc-k">CIPHER</span>
+              <span className="hoc-v mono">TLS 1.3 // ECDSA-256</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Console() {
   const [lines, setLines] = useState([])
   const [typing, setTyping] = useState('')
@@ -50,7 +125,7 @@ function Console() {
           } else {
             await wait(220)
           }
-          setLines(prev => [...prev, line].slice(-9))
+          setLines(prev => [...prev, line].slice(-6))
         }
         await wait(4200)
         setLines([])
@@ -142,7 +217,7 @@ export default function Hero({ ready }) {
       tl.from('.hero-badge', { autoAlpha: 0, y: 20, duration: 0.8 })
         .from('.hero-name .line-inner', { yPercent: 110, duration: 1.2, stagger: 0.1 }, '-=0.5')
         .from('.hero-sub > *', { autoAlpha: 0, y: 24, duration: 0.9, stagger: 0.08 }, '-=0.8')
-        .from('.hero-console', { autoAlpha: 0, x: 40, duration: 1 }, '-=0.9')
+        .from('.hero-right', { autoAlpha: 0, x: 40, duration: 1 }, '-=0.9')
         .from('.hero-hud > *', { autoAlpha: 0, duration: 0.6, stagger: 0.05 }, '-=0.6')
 
       gsap.to('.hero-bg', {
@@ -188,11 +263,13 @@ export default function Hero({ ready }) {
         <div className="hero-fade" />
       </div>
 
-      <div className="hero-hud" aria-hidden="true">
-        <span className="hud tl">LAT 14.75°N · LON 78.55°E</span>
-        <span className="hud tr">THREAT LEVEL: <b>CONTAINED</b></span>
-        <span className="hud bl">SCROLL TO DECRYPT ↓</span>
-        <span className="hud br">PORTFOLIO_v2026.10</span>
+      <div className="hero-hud">
+        <span className="hud tl" aria-hidden="true">LAT 14.75°N · LON 78.55°E</span>
+        <span className="hud tr" aria-hidden="true">THREAT LEVEL: <b>CONTAINED</b></span>
+        <span className="hud bl" aria-hidden="true">
+          <span className="bl-dot" /> SECURE CHANNEL // AG-2605
+        </span>
+        <span className="hud br" aria-hidden="true">PORTFOLIO_v2026.10</span>
       </div>
 
       <div className="container hero-content">
@@ -238,7 +315,10 @@ export default function Hero({ ready }) {
           </div>
         </div>
 
-        <Console />
+        <div className="hero-right">
+          <OperativeCard />
+          <Console />
+        </div>
       </div>
     </section>
   )

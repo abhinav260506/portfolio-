@@ -241,13 +241,15 @@ const LetterGlitch = ({
 
     const colorCache = new Map();
     const parse = value => {
-      const key = String(value);
+      if (!value) return [0, 0, 0];
+      const key = String(value).trim().toLowerCase();
+      if (key === '#000000' || key === '#000' || key === 'black') return [0, 0, 0];
       const cached = colorCache.get(key);
       if (cached) return cached;
-      let rgb = [1, 1, 1];
+      let rgb = [0, 0, 0];
       if (probe) {
         probe.clearRect(0, 0, 1, 1);
-        probe.fillStyle = '#ffffff';
+        probe.fillStyle = '#000000';
         probe.fillStyle = key;
         probe.fillRect(0, 0, 1, 1);
         const [r, g, b] = probe.getImageData(0, 0, 1, 1).data;
@@ -913,7 +915,6 @@ const LetterGlitch = ({
       gl.deleteTexture(stateTexture);
       gl.deleteVertexArray(vao);
       gl.deleteProgram(program.program);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, []);
 

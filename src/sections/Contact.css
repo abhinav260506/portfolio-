@@ -1,11 +1,15 @@
 .contact {
+  background: #000000;
+  position: relative;
   overflow: hidden;
   border-top: 1px solid var(--line);
 }
 .contact-bg {
   position: absolute;
   inset: 0;
-  opacity: 0.9;
+  opacity: 0.85;
+  background: #000000;
+  pointer-events: none;
 }
 .contact-inner {
   position: relative;

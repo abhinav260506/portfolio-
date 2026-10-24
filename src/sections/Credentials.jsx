@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { certifications, education, platforms } from '../data'
+import { certifications, platforms } from '../data'
 import './Credentials.css'
 
 export default function Credentials() {
@@ -9,30 +9,27 @@ export default function Credentials() {
 
   useGSAP(
     () => {
-      gsap.from('.cred-row', {
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: '#credentials', start: 'top 80%' },
+      })
+      tl.from('.cred-row', {
         autoAlpha: 0,
         y: 30,
-        stagger: 0.08,
-        duration: 0.8,
+        stagger: 0.06,
+        duration: 0.7,
         ease: 'power3.out',
-        scrollTrigger: { trigger: '.cred-list', start: 'top 80%' },
       })
-      gsap.from('.edu-item', {
-        autoAlpha: 0,
-        x: 30,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.edu', start: 'top 80%' },
-      })
-      gsap.from('.platform-item', {
-        autoAlpha: 0,
-        y: 20,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.platforms-box', start: 'top 85%' },
-      })
+      tl.from(
+        '.platform-item',
+        {
+          autoAlpha: 0,
+          y: 20,
+          stagger: 0.08,
+          duration: 0.6,
+          ease: 'power3.out',
+        },
+        '-=0.4'
+      )
     },
     { scope: root }
   )
@@ -99,21 +96,6 @@ export default function Credentials() {
                 </a>
               ))}
             </div>
-          </div>
-
-          <div className="edu">
-            <div className="edu-head">EDUCATION.LOG</div>
-            {education.map(e => (
-              <div className="edu-item" key={e.school}>
-                <div className="edu-period">{e.period}</div>
-                <div className="edu-school">{e.school}</div>
-                <div className="edu-detail">{e.detail}</div>
-                <div className="edu-foot">
-                  <span className="edu-score">{e.score}</span>
-                  <span className="edu-place">{e.place}</span>
-                </div>
-              </div>
-            ))}
           </div>
         </aside>
       </div>
