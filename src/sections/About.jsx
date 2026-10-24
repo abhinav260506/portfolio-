@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { profile, education, languages } from '../data'
+import profilePic from '../assets/profile.jpg'
 import './About.css'
 
 const MANIFESTO =
@@ -22,14 +23,18 @@ export default function About() {
           scrollTrigger: { trigger: '.manifesto', start: 'top 80%', end: 'bottom 45%', scrub: true },
         }
       )
-      gsap.from('.edu-box', {
-        y: 40,
-        autoAlpha: 0,
-        stagger: 0.09,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.edu-strip', start: 'top 85%' },
-      })
+      gsap.fromTo(
+        '.edu-box',
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.08,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.edu-strip', start: 'top 95%', once: true },
+        }
+      )
       gsap.from('.whoami-term', {
         clipPath: 'inset(0 0 100% 0)',
         duration: 1.2,
@@ -117,7 +122,7 @@ export default function About() {
           <div className="whoami-term corner-box">
             <div className="wt-bar">
               <div className="wt-bar-left">
-                <img src="/profile.jpg" alt="Abhinav Gunda" className="wt-avatar" />
+                <img src={profilePic} alt="Abhinav Gunda" className="wt-avatar" />
                 <span>~/profile.json</span>
               </div>
               <span className="wt-hash">utf-8 · verified</span>

@@ -5,6 +5,7 @@ import FaultyTerminal from '../components/reactbits/FaultyTerminal/FaultyTermina
 import DecryptedText from '../components/reactbits/DecryptedText/DecryptedText'
 import { profile } from '../data'
 import { scrollTo, prefersReducedMotion } from '../lib/smooth'
+import profilePic from '../assets/profile.jpg'
 import './Hero.css'
 
 // Scripted demo session shown in the hero console (labelled as a simulation).
@@ -36,7 +37,7 @@ function OperativeCard() {
       <div className="hoc-body">
         <div className="hoc-photo-frame">
           <img
-            src="/profile.jpg"
+            src={profilePic}
             alt="Abhinav Gunda - Security Engineer"
             className="hoc-photo"
             width="250"
@@ -266,9 +267,18 @@ export default function Hero({ ready }) {
       <div className="hero-hud">
         <span className="hud tl" aria-hidden="true">LAT 14.75°N · LON 78.55°E</span>
         <span className="hud tr" aria-hidden="true">THREAT LEVEL: <b>CONTAINED</b></span>
-        <span className="hud bl" aria-hidden="true">
-          <span className="bl-dot" /> SECURE CHANNEL // AG-2605
-        </span>
+        <a
+          href="#education"
+          className="hud bl bl-link cursor-target"
+          onClick={e => {
+            e.preventDefault()
+            scrollTo('#education')
+          }}
+          aria-label="Scroll to verified academic credentials"
+        >
+          <span className="bl-dot" />
+          <span className="bl-txt">EDUCATION DETAILS // VIT CHENNAI ↓</span>
+        </a>
         <span className="hud br" aria-hidden="true">PORTFOLIO_v2026.10</span>
       </div>
 
